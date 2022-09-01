@@ -1,4 +1,4 @@
-
+# inicio do projeto
 import pygame
 
 from pygame.locals import *
