@@ -1,4 +1,4 @@
-# Início do Projeto
+# Desenhando objetos na tela
 
 import pygame
 
@@ -8,12 +8,12 @@ from sys import exit
 
 pygame.init()
 
-largura = 640
-altura = 480
+LARGURA = 640
+ALTURA = 480
 
-tela = pygame.display.set_mode((largura, altura))
-pygame.display.set_caption('Jogo')
-# criando a janela do jogo.
+tela = pygame.display.set_mode((LARGURA, ALTURA))
+pygame.display.set_caption('SNAKE')
+
 
 while True:
     for event in pygame.event.get():
@@ -21,7 +21,15 @@ while True:
             pygame.quit()
             exit()
 
-            # loop para seguira atualizando o jogo e criar a função de fechar o jogo.
+    pygame.draw.rect(tela, (255,0,0), (200,300,100,100))
+    pygame.draw.circle(tela, (0,0,255), (300,260),50)
+    pygame.draw.line(tela, (255,255,0), (390,0),(390,600), 20)
+        # criada a funcao para: 'desenhar' na tela;
+        # cor (rgb); 
+        # posiçês orientadas nos eixos x e y;
+        # comprimento do retangulo;
 
+
+           
     pygame.display.update() 
-    # atualiza a tela do jogo a cada interação do loop principal.
+ 
