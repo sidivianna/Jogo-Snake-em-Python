@@ -1,4 +1,4 @@
-# Movendo objetos na tela
+# Gerando textos na tela
 
 import pygame
 from pygame.locals import *
@@ -12,9 +12,11 @@ ALTURA = 480
 x = LARGURA/2 
 y = ALTURA/2
 
-X_AZUL = randint(40, 600)
-Y_AZUL = randint(50, 430)
-# define posições randomizadas para o retângulo azul na tela.
+x_azul = randint(40, 600)
+y_azul = randint(50, 430)
+
+pontos = 0
+fonte = pygame.font.SysFont('arial', 40, True, False)
 
 tela = pygame.display.set_mode((LARGURA, ALTURA))
 pygame.display.set_caption('SNAKE')
@@ -23,6 +25,9 @@ relogio = pygame.time.Clock()
 while True:
     relogio.tick(30) 
     tela.fill((0,0,0)) 
+    mensagem = f'Pontos:{pontos}'
+    texto_formatado = fonte.render(mensagem, False, (255, 255, 255))
+    # formata o texto a ser exibido.
     for event in pygame.event.get():
         if event.type == QUIT:
             pygame.quit()
@@ -37,18 +42,14 @@ while True:
     if pygame.key.get_pressed()[K_DOWN]:
         y = y + 20
 
-    RET_VERMELHO = pygame.draw.rect(tela, (255,0,0), (x,y,40,50))
-    RET_AZUL = pygame.draw.rect(tela, (0,0,255), (X_AZUL,Y_AZUL,40,50))
-    # define os dois retangulos como variáveis
+    ret_vermelho = pygame.draw.rect(tela, (255,0,0), (x,y,40,50))
+    ret_azul = pygame.draw.rect(tela, (0,0,255), (x_azul,y_azul,40,50))
     
-    if RET_VERMELHO.colliderect(RET_AZUL):
-        X_AZUL = randint(40, 600)
-        Y_AZUL = randint(50, 430)
-        # cria a função colisão e faz com que sempre que haja colisão o trinagulo azul mude de posição.
-
-        
-
-    pygame.draw.rect(tela, (255,0,0), (x,y,40,50))
-   
+    if ret_vermelho.colliderect(ret_azul):
+        x_azul = randint(40, 600)
+        y_azul = randint(50, 430)
+        pontos = pontos + 1
+ 
+    tela.blit(texto_formatado, (450, 40)) # posição do texto na tela
     pygame.display.update() 
  
