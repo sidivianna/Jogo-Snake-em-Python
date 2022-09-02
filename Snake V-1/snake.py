@@ -1,4 +1,4 @@
-# 
+
 
 import pygame
 from pygame.locals import *
@@ -15,8 +15,8 @@ pygame.mixer.music.play(-1)
 
 LARGURA = 640
 ALTURA = 480
-x_cobra = LARGURA/2 
-y_cobra = ALTURA/2
+x_cobra = int(LARGURA/2) 
+y_cobra = int(ALTURA/2)
 
 velocidade = 10
 x_controle = velocidade
@@ -33,10 +33,29 @@ pygame.display.set_caption('SNAKE')
 relogio = pygame.time.Clock() 
 lista_cobra = []
 comprimento_inicial = 5
+morreu = False
 
 def aumenta_cobra(lista_cobra):
     for XeY in lista_cobra:
+        #XeY = [x, y]
+        #XeY[0] = x
+        #XeY[1] = y
+
         pygame.draw.rect(tela, (0,255,0),(XeY[0],XeY[1],20,20))
+
+def reiniciar_jogo():
+    global pontos, comprimento_inicial, x_cobra, y_cobra, lista_cobra, lista_cabeca, x_maca, y_maca, morreu
+    pontos = 0
+    comprimento_inicial = 5
+    x_cobra = int(LARGURA/2) 
+    y_cobra = int(ALTURA/2)
+    lista_cobra = []
+    lista_cabeca = []
+    x_maca = randint(40, 600)
+    y_maca = randint(50, 430)
+    morreu = False
+
+
         
 while True:
     relogio.tick(30) 
@@ -77,11 +96,9 @@ while True:
                 else:
                     y_controle = velocidade
                     x_controle = 0
-                        # criada a funcionalidade de bloquear o botao que manda a cobra ir para o sentido contrário ao qual ela está indo.(pass)
+                       
     x_cobra = x_cobra + x_controle
     y_cobra = y_cobra + y_controle
-    # controles para a cobra seguir andando sozinha
-
     
 
     cobra = pygame.draw.rect(tela, (0,255,0), (x_cobra,y_cobra,20,20))
@@ -91,7 +108,7 @@ while True:
         x_maca = randint(40, 600)
         y_maca = randint(50, 430)
         pontos += 1
-        comprimento_inicial += 1 # crescer
+        comprimento_inicial += 1 
         barulho_colisao.play()
 
     lista_cabeca = []   
@@ -100,10 +117,42 @@ while True:
 
     lista_cobra.append(lista_cabeca)
 
+    if lista_cabeca.count(lista_cabeca) > 1:
+        fonte2 = pygame.font.SysFont('aria', 20, True, True)
+        mensagem = 'GAME OVER!!! Pressione espaço para jogar novamente...'
+        texto_formatado = fonte2.render(mensagem, True, (0,0,0))
+        ret_texto = texto_formatado.get_rect()
+        # criar o texto para ser exibido na tela
+
+        morreu = True
+        while morreu:
+            tela.fill(255,255,255)
+            for event in pygame.event.get():
+                if event.type == QUIT:
+                    pygame.quit()
+                    exit()
+                if event.type == KEYDOWN:
+                    if event.key == K_SPACE:
+                        reiniciar_jogo()
+                        # funcionalidade para reiniciar o jog quando a cabeça tocar no corpo da cobra.
+
+            ret_texto.center = (LARGURA//2, ALTURA//2)
+            tela.blit(texto_formatado, ret_texto)  # centralizar o texto      
+            pygame.display.update()
+
+    if x_cobra > LARGURA:
+        x_cobra = 0
+    if x_cobra < 0:
+        x_cobra = LARGURA
+    if y_cobra < 0:
+        y_cobra = ALTURA
+    if y_cobra > ALTURA:
+        y_cobra = 0
+        # reiniciar no lado oposo sempre que a cobra sair da tela.
+
+
     if len(lista_cobra) > comprimento_inicial:
         del lista_cobra[0]
-        # função de apagar a posição zero do corpo para não crescer indefinidamente
-    
 
     aumenta_cobra(lista_cobra)
     
