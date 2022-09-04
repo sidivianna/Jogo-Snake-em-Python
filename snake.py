@@ -32,12 +32,6 @@ lista_cobra = []
 comprimento_inicial = 3
 morreu = False
 
-def limite_tela(x_cobra, y_cobra):
-    if x_cobra >= LARGURA or x_cobra <= 0 or y_cobra < 0 or y_cobra > ALTURA:
-        return True
-    else:
-        return False
-        # função que define os limites da tela e termina o jogo se houver colisão nestas.
 def aumenta_cobra(lista_cobra):
     for XeY in lista_cobra:
         #XeY = [x, y]
@@ -118,7 +112,7 @@ while True:
 
     lista_cobra.append(lista_cabeca)
 
-    if lista_cobra.count(lista_cabeca) > 1 or limite_tela(x_cobra, y_cobra) == True: # reinicia o jogo se sair dos limites da tela
+    if lista_cobra.count(lista_cabeca) > 1:
         fonte2 = pygame.font.SysFont('arial', 20, True, True)
         mensagem = 'Game over! Pressione a tecla ESPAÇO para jogar novamente'
         texto_formatado = fonte2.render(mensagem, True, (0,0,0))
@@ -143,14 +137,14 @@ while True:
 
     
 
-    '''if x_cobra > LARGURA:
+    if x_cobra > LARGURA:
         x_cobra = 0
     if x_cobra < 0:
         x_cobra = LARGURA
     if y_cobra < 0:
         y_cobra = ALTURA
     if y_cobra > ALTURA:
-        y_cobra = 0'''
+        y_cobra = 0
         # reiniciar no lado oposo sempre que a cobra sair da tela.
 
 
