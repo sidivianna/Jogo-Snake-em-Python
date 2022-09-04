@@ -1,5 +1,3 @@
-
-
 import pygame
 from pygame.locals import *
 from sys import exit
@@ -11,7 +9,6 @@ pygame.mixer.music.set_volume(0.1)
 musica_de_fundo = pygame.mixer.music.load('sons/01.mp3')
 barulho_colisao = pygame.mixer.Sound('sons/smw_coin.wav')
 pygame.mixer.music.play(-1)
-
 
 LARGURA = 640
 ALTURA = 480
@@ -32,7 +29,7 @@ tela = pygame.display.set_mode((LARGURA, ALTURA))
 pygame.display.set_caption('SNAKE')
 relogio = pygame.time.Clock() 
 lista_cobra = []
-comprimento_inicial = 5
+comprimento_inicial = 3
 morreu = False
 
 def aumenta_cobra(lista_cobra):
@@ -55,8 +52,6 @@ def reiniciar_jogo():
     y_maca = randint(50, 430)
     morreu = False
 
-
-        
 while True:
     relogio.tick(30) 
     tela.fill((0,0,0)) 
@@ -117,16 +112,16 @@ while True:
 
     lista_cobra.append(lista_cabeca)
 
-    if lista_cabeca.count(lista_cabeca) > 1:
-        fonte2 = pygame.font.SysFont('aria', 20, True, True)
-        mensagem = 'GAME OVER!!! Pressione espaço para jogar novamente...'
+    if lista_cobra.count(lista_cabeca) > 1:
+        fonte2 = pygame.font.SysFont('arial', 20, True, True)
+        mensagem = 'Game over! Pressione a tecla R para jogar novamente'
         texto_formatado = fonte2.render(mensagem, True, (0,0,0))
         ret_texto = texto_formatado.get_rect()
         # criar o texto para ser exibido na tela
 
         morreu = True
         while morreu:
-            tela.fill(255,255,255)
+            tela.fill((255,255,255))
             for event in pygame.event.get():
                 if event.type == QUIT:
                     pygame.quit()
@@ -139,6 +134,8 @@ while True:
             ret_texto.center = (LARGURA//2, ALTURA//2)
             tela.blit(texto_formatado, ret_texto)  # centralizar o texto      
             pygame.display.update()
+
+    
 
     if x_cobra > LARGURA:
         x_cobra = 0
@@ -161,6 +158,3 @@ while True:
 
     pygame.display.update() 
  
-
-
-
