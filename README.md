@@ -8,3 +8,4 @@ criada a funcao para:
 - cor (rgb); 
 - posiçês orientadas nos eixos x e y;
 - comprimento do das figuras desenhadas;
+.
