@@ -1,11 +1,11 @@
 # Jogo-Snake-em-Python
 ## Jogo Snake desenvolvido em Python
 
-### Parte 2
+Parte 3
 
-criada a funcao para:
-- Desenhar na tela(draw);
-- cor (rgb); 
-- posiçês orientadas nos eixos x e y;
-- comprimento do das figuras desenhadas;
-.
+### Movendo objetos na tela
+
+- Controle de taxa de atualização e framerate;
+- Movimento do objeto e atualização da tela após seu movimento.
+- Loop para o objeto sempre reinicar seu movimento no topo da tela.
+

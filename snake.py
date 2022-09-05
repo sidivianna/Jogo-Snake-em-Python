@@ -1,4 +1,4 @@
-# Desenhando objetos na tela
+# Movendo objetos na tela
 
 import pygame
 
@@ -10,26 +10,29 @@ pygame.init()
 
 LARGURA = 640
 ALTURA = 480
+x = LARGURA/2 # posição do obejto na tela
+y = 0
 
 tela = pygame.display.set_mode((LARGURA, ALTURA))
 pygame.display.set_caption('SNAKE')
+relogio = pygame.time.Clock() # controla a taxa de atualização do jogo
 
 
 while True:
+    relogio.tick(30) # framerate
+    tela.fill((0,0,0)) # atualiza a tela de preto depois que obejeto passa.
     for event in pygame.event.get():
         if event.type == QUIT:
             pygame.quit()
             exit()
 
-    pygame.draw.rect(tela, (255,0,0), (200,300,100,100))
-    pygame.draw.circle(tela, (0,0,255), (300,260),50)
-    pygame.draw.line(tela, (255,255,0), (390,0),(390,600), 20)
-        # criada a funcao para: 'desenhar' na tela;
-        # cor (rgb); 
-        # posiçês orientadas nos eixos x e y;
-        # comprimento do retangulo;
+    pygame.draw.rect(tela, (255,0,0), (x,y,40,50))
 
-
-           
+    if y >= ALTURA:
+        y = 0
+    y = y + 1
+    # faz o retângulo sempre reiniciar quando chegar no fim da tela
+  
+   
     pygame.display.update() 
  
