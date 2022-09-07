@@ -1,11 +1,10 @@
 # Jogo-Snake-em-Python
-## Jogo Snake desenvolvido em Python
 
-Parte 3
+Jogo Snake desenvolvido em Python
 
-### Movendo objetos na tela
+5-Colisões
 
-- Controle de taxa de atualização e framerate;
-- Movimento do objeto e atualização da tela após seu movimento.
-- Loop para o objeto sempre reinicar seu movimento no topo da tela.
+- criada uma função para randomizar o aparecimento do retangulo na tela;
+- definir os dois retângulos como variáveis;
+- sempre que houver colisão um dos retângulos mude de posição.
 
