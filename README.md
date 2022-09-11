@@ -1,6 +1,7 @@
 # Jogo-Snake-em-Python
 Jogo Snake desenvolvido em Python
 
-6 - Escrevendo textos na tela do jogo
+## 7 Música e Sons.
 
-Criando uma estrutura para escrever os textos na tela.
+Adicionada a funcionalidade de tocar música no jogo e som ao pegar a maçã.
+

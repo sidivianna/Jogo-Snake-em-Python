@@ -1,4 +1,4 @@
-# Gerando textos na tela
+# Músicas e Sons
 
 import pygame
 from pygame.locals import *
@@ -6,6 +6,12 @@ from sys import exit
 from random import randint
 
 pygame.init()
+
+pygame.mixer.music.set_volume(0.1)
+musica_de_fundo = pygame.mixer.music.load('sons/01.mp3')
+barulho_colisao = pygame.mixer.Sound('sons/smw_coin.wav')
+pygame.mixer.music.play(-1)
+# inicia o player de música, e configura volume.
 
 LARGURA = 640
 ALTURA = 480
@@ -16,7 +22,7 @@ x_azul = randint(40, 600)
 y_azul = randint(50, 430)
 
 pontos = 0
-fonte = pygame.font.SysFont('arial', 40, True, False)
+fonte = pygame.font.SysFont('arial', 40, bold=True, italic=True)
 
 tela = pygame.display.set_mode((LARGURA, ALTURA))
 pygame.display.set_caption('SNAKE')
@@ -27,7 +33,7 @@ while True:
     tela.fill((0,0,0)) 
     mensagem = f'Pontos:{pontos}'
     texto_formatado = fonte.render(mensagem, False, (255, 255, 255))
-    # formata o texto a ser exibido.
+    
     for event in pygame.event.get():
         if event.type == QUIT:
             pygame.quit()
@@ -48,8 +54,9 @@ while True:
     if ret_vermelho.colliderect(ret_azul):
         x_azul = randint(40, 600)
         y_azul = randint(50, 430)
-        pontos = pontos + 1
+        pontos += 1
+        barulho_colisao.play()
  
-    tela.blit(texto_formatado, (450, 40)) # posição do texto na tela
+    tela.blit(texto_formatado, (450, 40)) 
     pygame.display.update() 
  
