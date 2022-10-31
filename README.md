@@ -1,6 +1,8 @@
 # Jogo-Snake-em-Python
 Jogo Snake desenvolvido em Python
 
+12-Alteração-movimento-em-bloco
+
 ## Atualizações
 
 
@@ -11,3 +13,5 @@ Jogo Snake desenvolvido em Python
  - adicionada função de trocar de cor da cobrinha em level_up;
  - criado contador de level na tela;
  - criada a função pause no jogo.
+
+
