@@ -31,7 +31,6 @@ y_maca = randrange(0, 620, 20) # 480 //20 = 24
 
 level = 1
 pontos = 0
-#mensagem_tela = []
 fonte = pygame.font.SysFont('arial', 20, bold=True, italic=True)
 
 tela = pygame.display.set_mode((LARGURA, ALTURA))
@@ -41,8 +40,20 @@ relogio = pygame.time.Clock()
 comprimento_inicial = 5
 morreu = False
 
-#def mensagem_tela():
-    #fonte = pygame.font.SysFont('arial', 20, bold=True, italic=True)
+def mensagem_tela():
+    tela.fill((255,255,255))
+    fonte = pygame.font.SysFont('arial', 20, bold=True, italic=True)
+    fonte2 = pygame.font.SysFont('arial', 20, True, True)
+    mensagem = 'Pressione a tecla ESPAÇO para reiniciar e C para continuar...'
+    texto_formatado = fonte2.render(mensagem, True, (0,0,0))
+    ret_texto = texto_formatado.get_rect()
+    
+     
+    ret_texto.center = (LARGURA//2, ALTURA//2)
+    tela.blit(texto_formatado, ret_texto)  # centralizar o texto      
+    pygame.display.update()
+    
+        
 
 def level_up():
     up_level.play()
@@ -50,11 +61,12 @@ def level_up():
 def pause():
     paused = True
     while paused:
-        tela.fill((255,255,255))
-        fonte2 = pygame.font.SysFont('arial', 20, True, True)
-        mensagem = 'PAUSE Pressione a tecla C para continuar e Q para sair'
-        texto_formatado = fonte2.render(mensagem, True, (0,0,0))
-        ret_texto = texto_formatado.get_rect()
+        
+        mensagem_tela()
+        '''fonte2 = pygame.font.SysFont('arial', 20, True, True)'''
+        mensagem.append('game over')
+        '''texto_formatado = fonte2.render(mensagem, True, (0,0,0))
+        ret_texto = texto_formatado.get_rect()'''
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 pygame.quit()
@@ -66,9 +78,9 @@ def pause():
                     pygame.quit()
                     quit()
 
-            ret_texto.center = (LARGURA//2, ALTURA//2)
+            '''ret_texto.center = (LARGURA//2, ALTURA//2)
             tela.blit(texto_formatado, ret_texto)  # centralizar o texto      
-            pygame.display.update()
+            pygame.display.update()'''
         
             
 def limite_tela(x_cobra, y_cobra):
@@ -202,15 +214,17 @@ while True:
 
 
     if lista_cobra.count(lista_cabeca) > 1 or limite_tela(x_cobra, y_cobra) == True: 
-        fonte2 = pygame.font.SysFont('arial', 20, True, True)
-        mensagem = 'Game over! Pressione a tecla ESPAÇO para jogar novamente'
-        texto_formatado = fonte2.render(mensagem, True, (0,0,0))
+        mensagem_tela()
+        '''fonte2 = pygame.font.SysFont('arial', 20, True, True)'''
+        '''mensagem = mensagem('GameOver')'''
+        '''texto_formatado = fonte2.render(mensagem, True, (0,0,0))
+        '''
         musica_de_fundo = pygame.mixer.music.pause()
-        ret_texto = texto_formatado.get_rect()
+        '''ret_texto = texto_formatado.get_rect()'''
 
         som_game_over.play()
 
-        #morreu_end()
+        
 
         morreu = True
         while morreu:
@@ -225,9 +239,9 @@ while True:
 
                         
 
-            ret_texto.center = (LARGURA//2, ALTURA//2)
+            '''ret_texto.center = (LARGURA//2, ALTURA//2)
             tela.blit(texto_formatado, ret_texto)  # centralizar o texto      
-            pygame.display.update()
+            pygame.display.update()'''
         
 
     if len(lista_cobra) > comprimento_inicial:
@@ -246,11 +260,11 @@ while True:
  # importar a biblioteca sleep e fazer a cobra se mover em blocos de 20
  # correção para nao deixar que a cobra passe meio corpo para fora da tela
  # adicionada musica de game-over
- # corrgido som pausar ao reiniciar
+ # corrigido som pausar ao reiniciar
  # adicionada função de trocar de cor da cobrinha em level_up
  # criado contador de level na tela
-
-
  # criar uma função pause no game
+
+ # problemas para exibir dirferentes meensagens na tela(game over e pause)
  # bug: - corrigir problema da maça respaunar em algum espaço que ja esteja o corpo da cobra(porem nao espauno dentro dos blocos de 20) (da erro quando reinicia o jogo)
  
